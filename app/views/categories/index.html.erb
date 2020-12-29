@@ -1,0 +1,36 @@
+<%= render "partials/notice" %>
+
+<h1>Categories</h1>
+
+<%= link_to 'New Category', new_category_path %>
+
+
+<div class="container">
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-lg-4">
+        <div class="container">  
+          <div class="card border-secondary mb-3" style="max-width: 20rem;">  
+            <div class="card-header">Category Name:<%= category.name %></div>
+              <div class="card-body">
+                <h4 class="card-title">Color:</h4>
+                <p class="card-text"><%= category.color %></p>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <%= link_to 'Show', category, class:"btn btn-info btn-sm" %>
+                  </div>
+                  <div class="col-lg-4">
+                    <%= link_to 'Edit', edit_category_path(category), class:"btn btn-warning btn-sm" %>
+                  </div>
+                  <div class="col-lg-4">  
+                    <%= link_to "Delete", category, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-danger btn-sm" %>    
+                  </div>
+                </div>
+              </div>
+          </div>      
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

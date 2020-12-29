@@ -1,0 +1,8 @@
+<%# Barra izquierda de categorias siempre visible %>
+
+<div class="list-group">
+  <%= link_to "Categorias", categories_path, class:"list-group-item list-group-item-action active" %>
+  <% @category_viewer.each do |category| %>
+    <%= link_to category.name, category, class:"list-group-item list-group-item-action" %>
+  <%end%>
+</div>

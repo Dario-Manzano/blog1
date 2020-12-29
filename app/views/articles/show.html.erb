@@ -1,0 +1,17 @@
+<%# la vista show esta hecha para que muestre los parametros y los muestre
+cambia la ulr de show a la der articulo %>
+<%= render "partials/notice" %>
+
+<%= @article.inspect %>
+<h1> <%= @article.title %> </h1>
+<h3> <%= @article.description %> </h3>
+
+<%= link_to "atras", articles_path, class:"btn btn-secondary" %> 
+<%# el metodo root necesita el _path para poder aceptarlo como metodo de ruta%>
+
+<%= link_to "Editar", edit_article_path %>
+<%#  
+<%= link_to "Nuevo", new_article_path >
+<%= link_to "Articulos", articles_path >
+Desde la terminal colocas rails routes, para ver las rutas del proyecto. 
+cada una de ellas se les puede hace _path para se usados como rutas. es lo MAXIMO  %>

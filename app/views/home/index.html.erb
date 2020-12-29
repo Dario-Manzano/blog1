@@ -1,0 +1,47 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-1">
+            <%= link_to "API", "https://api.rubyonrails.org/", class:"btn btn-secondary" %>
+            <%# <button type="button" class="btn btn-primary">Primary</button> %>
+        </div>
+        <div class="col-lg-auto">
+            <%= link_to "Lista de Articulo", articles_path, class:"btn btn-primary" %> <%# http://127.0.0.1:3000/articles %>
+            <%# <%= link_to "Categorias", categories_path %> 
+            <%# i can use a button_to, but need a parameter, better use link_to with class btn btn-secondary %>
+        </div>
+        <div class="col-lg-1">
+            <%= link_to "Categorias", categories_path, class:"btn btn-secondary" %>
+        </div>
+    </div>
+</div>
+
+<div class="container space">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Pagina principal del blog</h1>
+            <h3 class="text-center">Aquí están los articulos, por algún motivo</h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="container space">
+    <div class="row">
+        <% @articulo.each do |art| %>
+            <div class="col-lg-4">
+                <div class="jumbotron text-center color-b">
+                    <%# <p class="text-center"> %>
+                        <a href="/articles/<%=art.id%>" class="lead"><%=art.id%></a> <%#codigo html %>
+                        <%# <%= art.to_yaml>  %>
+                        <%= link_to art.title, art %><br>
+                        <hr class="my-4">
+                        <%= art.description%>
+                    <%# </p> %>
+                </div>
+            </div>
+        <%end%>
+    </div>
+</div>
+
+
