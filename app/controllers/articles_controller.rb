@@ -17,9 +17,15 @@ class ArticlesController < ApplicationController
   def create
   # Agrega articulos a la Base de datos
   # Raise params[:article].to_yaml 
-    @article = Article.new(article_params)
+    @article = current_user.article.new(article_params) # si no tengo usuarios Article.new(article_params)
+    # pero si coloco usuarios y quiero que los logueados queden registrados al crear articulos, debo
+    # colocar current_user.article.new(article_params) current_user(verifica que esté logueado) puede colocarse ç
+    # antes de article solo si en el modelo de article.rb, esta belons_to :user (que tambien pertenecea a usuario)
+    # solo asociar, se debe definir las restricciones para eliminar
+    
     respond_to do |format|
       if @article.save
+        # raise @article.to_yaml
         format.html {redirect_to @article, notice: "Wiii lo creaste" } 
         # colocas el notice en la view y podras verlo igual alert
         format.json {render :show, status: :created, location: @article}

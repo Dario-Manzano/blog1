@@ -26,7 +26,11 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_user.category.new(category_params)  # si no tengo usuarios Article.new(article_params)
+    # pero si coloco usuarios y quiero que los logueados queden registrados al crear articulos, debo
+    # colocar current_user.article.new(article_params) current_user(verifica que esté logueado) puede colocarse ç
+    # antes de article solo si en el modelo de article.rb, esta belons_to :user (que tambien pertenecea a usuario)
+    # solo asociar, se debe definir las restricciones para elimina
 
     respond_to do |format|
       if @category.save

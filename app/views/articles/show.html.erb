@@ -5,6 +5,13 @@ cambia la ulr de show a la der articulo %>
 <%= @article.inspect %>
 <h1> <%= @article.title %> </h1>
 <h3> <%= @article.description %> </h3>
+<% if @article.user != nil %>
+    <h3> <%= @article.user.email %> </h3>
+<%else%>
+    <h6><%= "No hay usuario registrado para este articulo"%> </h6>
+<%end%>
+<%# Al estar las bases de datos relacionadas, puedo llamar de 
+@article(objeto seleccionado).user(usuario que lo creo).user_column(columna de usuario) %>
 
 <%= link_to "atras", articles_path, class:"btn btn-secondary" %> 
 <%# el metodo root necesita el _path para poder aceptarlo como metodo de ruta%>
