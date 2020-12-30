@@ -30,7 +30,8 @@ class ArticlesController < ApplicationController
         # colocas el notice en la view y podras verlo igual alert
         format.json {render :show, status: :created, location: @article}
       else
-        format.html {redirect_to :new}
+        format.html {render :new} # {redirect_to article_path} si coloco esto no me acepta el if de la validacion
+        # redirect_to te lleva a otra pagina sin datos previos, render te lleva o llama otra pagina con los datos previos
         format.json {render json: @article.errors, status: :unprocesable_emtity}
       end  
     end

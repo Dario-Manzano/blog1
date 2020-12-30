@@ -4,9 +4,21 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
 <div class="container">
     <div class="row space">
         <div class="col-lg-6 offset-lg-3">
-            <div class="container-md-12">
+            <div class="container-md-12"> 
                 <h3><%= "#{titulo} articulo" %></h3>
-                <%= form_with(model: article) do |f|%>
+                <%= form_with(model: article, local: true) do |f|%>
+                    <%= puts "Comprobacion de error #{article.errors.any?}" %>
+                    <%= puts article.inspect %>
+                    <% if article.errors.any? %>
+                        <div id="error_explanation">
+                            <h2><%= pluralize(article.errors.count, "error") %> prohibited this category from being saved:</h2>
+                            <ul>
+                                <% article.errors.full_messages.each do |message| %>
+                                    <li><%= message %></li>
+                                <% end %>
+                            </ul>
+                         </div>
+                    <% end %>
                     <div class="form-group">
                         <%= f.label "Titulo" %>
                         <%= f.text_field :title, class:"form-control" %>        
