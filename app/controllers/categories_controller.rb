@@ -1,7 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy] # AUTENTICADOR DE USUARIOS 
+  #before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy] 
+  # AUTENTICADOR DE USUARIOS. si no es usuario no puede hacer nada de los que está dentro de [] 
+  before_action :authenticate_editor!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_admin!, only: [:destroy]
   # se ejecuta antes de los metodos solo en los seleccionados
+  # Filtro lo que no pude hace un usuario logueado, uno no logueado SOLO VE todo, uno  editor crea y edita
+  # el admin hace lo del editor (se especifica en el modelo) y ademas destruye  
 
   # GET /categories
   # GET /categories.json
@@ -37,7 +42,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
-        format.html { render new_category_path }
+        format.html { render new_category_path } # new_category_path = a :new
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end

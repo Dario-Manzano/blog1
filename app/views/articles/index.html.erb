@@ -11,24 +11,37 @@
 
 <div class="container space1">
   <div class="row">
-    <table class="table table-hover col-lg-8  offset-lg-2">
+    <table class="table table-hover col-lg-10 offset-lg-1">
       <thead>
         <tr class="table-primary">
           <th scope="row", class="col-lg-1">Codigo</th>
           <th scope="col", class="col-lg-2">Titulo</th>
-          <th scope="col", class="col-lg-auto">Descripción</th>
-          <th scope="col", class="col-lg-1">Editar</th>
-          <th scope="col", class="col-lg-1">Eliminar</th>
+          <th scope="col", class="col-lg-5">Descripción</th>
+          <th scope="col", class="col-lg-1">Categorias</th>
+          <th scope="col", class="col-lg-1"><%#Editar%></th> <%# ELIMINO ESTAS LINEAS PORQUE NO TODOS PUEDEN EDITAR Y ELIMINAR%>
+          <th scope="col", class="col-lg-1"><%#Eliminar%></th>
         </tr>
       </thead>
       <% @articulo.each do |item| %>
         <tbody>
           <tr>
-            <th scope="col" ><%= item.id %></th>
+            <th scope="col" ><%= link_to item.id, item %></th>
             <th scope="col"><%= item.title %></th>
             <th scope="col"><%= item.description %></th>
-            <th scope="col"><%= link_to "Editar", edit_article_path(item) %></th>
-            <th scope="col"><%= link_to "Eliminar #{item.title}", item, method: :delete, data: {confirm:"Seguro mi pana?"} %></th>
+            <% temp = "" %>
+            <% item.categories.each do |category|%> <%# item es el iterador, es el valor que debes de tomar para optener cada categoria %>
+              <%temp = "#{temp} #{category.name}"%>
+              <%# <th scope="col"><%= item.categories.count ></th> %>
+            <% end %>
+            <th scope="col"><%= temp %></th>
+            <%if user_signed_in? %>
+              <%if current_user.is_editor? %>
+                <th scope="col"><%= link_to "Editar", edit_article_path(item) %></th>
+              <%end%>
+              <%if current_user.is_admin?%>
+                <th scope="col"><%= link_to "Eliminar #{item.title}", item, method: :delete, data: {confirm:"Seguro mi pana?"} %></th>
+              <%end%>
+            <%end%>
             <%# Al colocar link_to me toma la peticion como un GET y no pasa el parametro |item| a el metodo,
             si utilizo button_to, funciona perfecto, pero link_to no.
             el el servidor se ve que toma como GET y no como parametro.

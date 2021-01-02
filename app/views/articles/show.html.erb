@@ -10,6 +10,9 @@ cambia la ulr de show a la der articulo %>
 <%else%>
     <h6><%= "No hay usuario registrado para este articulo"%> </h6>
 <%end%>
+<% @article.categories.each do |article| %> <%#  Al estar las tablas relacionadas, busco en @article(objeto).categories(array de categorias dentro del objeto) (estan todas las categorias agregadas al objeto) %>
+    <%= article.name %> <%# Esto ya itera deltro del array de @articlecategori name%>
+<% end %>
 <%# Al estar las bases de datos relacionadas, puedo llamar de 
 @article(objeto seleccionado).user(usuario que lo creo).user_column(columna de usuario) %>
 

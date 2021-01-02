@@ -22,12 +22,19 @@
 
     <%= render "partials/navbar" %>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-2 space">
-          <%=render "partials/category" %>
+      <div class="row space">
+        <div class="col-lg-2">
+          <div class="row-auto" style="padding-bottom: 5px">
+            <%=render "partials/profile" %>
+          </div>
+          <div class="row-auto">
+            <%=render "partials/category" %>
+          </div>
         </div>
-        <div class="col-lg-10 space">
+        <div class="col-lg-10">
           <%= yield %>
-        <div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

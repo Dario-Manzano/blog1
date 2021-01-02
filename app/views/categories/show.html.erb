@@ -11,6 +11,12 @@
   <%= @category.color %>
 </p>
 <p>
+Articulos:
+<% @category.articles.each do |article| %> <%# Al estar las tablas de articulo y categoria cruzadas, puedo mostrar esto %>
+  <%= article.title %>
+<%end%>
+</p>
+<p>
   <strong>Creador:</strong>
 </p>
 <p>
