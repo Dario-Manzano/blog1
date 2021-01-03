@@ -3,7 +3,9 @@
 <%if user_signed_in? %>
     <div class="list-group">
         <%= link_to "Perfil", root_path, class:"list-group-item list-group-item-action active" %>
-        <%= link_to "Articulos", articles_path, class:"list-group-item list-group-item-action" %>
-        <%= link_to "Categorias", categories_path, class:"list-group-item list-group-item-action" %>
+        <%= link_to "Mis articulos", articles_indexuser_path, class:"list-group-item list-group-item-action" %>
+        <%= link_to "Mis Categorias", categories_indexuser_path, class:"list-group-item list-group-item-action" %>
+        <%# <%raise user_signed %>
     </div>
 <%end%>
+

@@ -8,7 +8,7 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
                 <h3><%= "#{titulo} articulo" %></h3>
                 <%= form_with(model: article, local: true) do |f|%>
                     <%= puts "Comprobacion de error #{article.errors.any?}" %>
-                    <%= puts article.inspect %>
+                    <%# raise article.to_yaml %>
                     <% if article.errors.any? %>
                         <div id="error_explanation">
                             <h2><%= pluralize(article.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -21,17 +21,18 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
                     <% end %>
                     <div class="form-group">
                         <%= f.label "Titulo" %>
-                        <%= f.text_field :title, class:"form-control" %>        
+                        <%= f.text_field :title, placeholder:"Título", class:"form-control" %>        
                     </div>
                     <div>
                         <% Category.all.each do |category| %>
                             <%= check_box_tag "categories[]", category.id %><%= category.name %>
                             <%# [] son para seleccionar varios, la variable debe ser igual a la de controlador sencible a mayusculas%>
+                            <%# raise @catego %>
                         <% end %>
                     </div>
                     <div class="form-group">
                         <%= f.label "Articulo" %>         <%# etiqueta, que aparece %>
-                        <%= f.text_area :description, class:"form-control" %>   <%# cuadro de texto grande %>
+                        <%= f.text_area :description, placeholder:"Escribe tu articulo", class:"form-control" %>   <%# cuadro de texto grande %>
                     </div>
                     <%# <%= @current_user.id # ver el usurio, esta como parametro siemrpe %> 
                     <div>
@@ -46,17 +47,4 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
  
 <%# el metodo root necesita el _path para poder aceptarlo como metodo de ruta %>
 
-<%# <fieldset class="form-group">
-      <legend>Checkboxes</legend>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" value="" checked="">
-          Option one is this and that—be sure to include why it's great
-        </label>
-      </div>
-      <div class="form-check disabled">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" value="" disabled="">
-          Option two is disabled
-        </label>
-      </div> %>
+

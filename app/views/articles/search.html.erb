@@ -1,0 +1,5 @@
+<h2>Resultados de tu busqueda</h2>
+
+<% @articles.each do |article|%>
+    <p><%= link_to article.title, article%></p> <%# PRIMERO VA LO QUE ES A MOSTRAR, SEGUNDO EL ITERADOR QUE ES CADA OBJETO QUE ES LINQUEABLE A TRAVES DE SHOW%>
+<%end%>

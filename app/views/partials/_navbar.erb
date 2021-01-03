@@ -35,9 +35,31 @@
         </div>
       </li>
     </ul>
+    <%= form_tag articles_search_path, :method => 'get', class:"form-inline my-2 my-lg-0" do %>
+      <%= text_field_tag :query, nil, placeholder: 'Articulo a consultar', class:"form-control mr-sm-2" %>
+      <%=submit_tag "Search", class:"btn btn-secondary my-2 my-sm-0" %>
+    <% end %>
+  </div>
+</nav>
+
+
+<%# Este es el buscador del nav bar 
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+    </form> %>
+
+<%# El buscador en formato rails es: > estudiar esto porque es confuso!
+<% form_tag projects_path, :method => 'get' do >
+  <p>
+    <%= text_field_tag :search, params[:search] >
+    <%=submit_tag "Search", :name => nil >
+  </p>
+  
+  FORMULARIO QUE SE USA PARA IR A UNA URL CON PARAMETROS
+  ESTUDIAR ESTO, PARA QUE ES EL PARAMS Y EL :NAME => NIL
+  <%= form_tag articles_search_path, :method => 'get', class:"form-inline my-2 my-lg-0" do >
+      <%= text_field_tag :title, params[:titulo], class:"form-control mr-sm-2" >
+      <%=submit_tag "Search", :name => nil, class:"btn btn-secondary my-2 my-sm-0" >
+    <% end >
+<% end %>

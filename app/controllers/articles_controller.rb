@@ -7,31 +7,38 @@ class ArticlesController < ApplicationController
 
   # before_action :imprimir, execept: [:index, :show, :update, :destroy]
   # se ejecuta antes de los metodos en todos menos lo seleccionado
+  def search
+    #raise params.to_yaml
+
+    @articles = Article.search(params[:query])
+    #raise params.to_yaml
+  end
 
   def show
-    # no se que hace
+    # Muestra por defecto, segun el motor de rails, permite mostrar.
   end
 
   def new
     @article = Article.new
-    @categories = Category.all #Variale que deberia tomar la view pero no la toma investigar
+    @catego = Category.all
+    #Variale que deberia tomar la view pero no la toma investigar
     
   end
 
   def create
-  # Agrega articulos a la Base de datos
-  # Raise params[:article].to_yaml 
+    
+    # Agrega articulos a la Base de datos
+    # Raise params[:article].to_yaml 
     @article = current_user.article.new(article_params) # si no tengo usuarios Article.new(article_params)
     # pero si coloco usuarios y quiero que los logueados queden registrados al crear articulos, debo
     # colocar current_user.article.new(article_params) current_user(verifica que esté logueado) puede colocarse ç
     # antes de article solo si en el modelo de article.rb, esta belons_to :user (que tambien pertenecea a usuario)
     # solo asociar, se debe definir las restricciones para eliminar
     @article.categories = params[:categories] #recibe como imput y lo asocia a un articulo
-
+    #raise @article.to_yaml
 
     respond_to do |format|
       if @article.save
-        # raise @article.to_yaml
         format.html {redirect_to @article, notice: "Wiii lo creaste" } 
         # colocas el notice en la view y podras verlo igual alert
         format.json {render :show, status: :created, location: @article}
@@ -57,11 +64,24 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articulo = Article.all
+    @articulo = Article.all #search("t")
     #articulo1 = Article.find(1)
     #puts articulo1.title Esto sale por consola, se ve en el servidor
     #puts articulo1.description Esto sale por consola, sale en el servidor
   end
+
+  def indexuser
+    articles = Article.all
+    @articles = []
+    articles.each do |art|
+      if art.user_id == current_user.id
+        @articles.push(art)
+      end
+    end
+    return articles
+    # raise @articles.to_yaml
+  end
+  
 
   def edit
   # Funcion estandar qno se si permite editar los articulos de la tabla

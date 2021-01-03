@@ -14,6 +14,18 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
+  def indexuser
+    catego = Category.all
+    @categories = []
+    catego.each do |f|
+      if f.user_id == current_user.id 
+        @categories.push(f)
+      end      
+    end
+    return @categories
+  end
+
+
   # GET /categories/1
   # GET /categories/1.json
   def show
