@@ -3,6 +3,7 @@ class Article < ApplicationRecord
     after_create :save_categories
     has_many :has_categories # un articulo tiene muchas categorias
     has_many :categories, through: :has_categories # RELACIONA ARTICULO Y CATEGORIAS A TRAVES DE HAS_CATEGORIES
+    
     scope :ultimo, -> {order("created_at DESC")} #metodo para que la base de datos entregue desde el ultimo al primero
     scope :primero, -> {order("created_at ASC")} #metodo para que la base de datos estregue desde el primero al ultimos
     # scope :puntual, -> {where(title:"Polilla")} para realizar una consulta precisa desde el modelo
@@ -20,10 +21,16 @@ class Article < ApplicationRecord
     validates :title, length: {in: 5..25}
     validates :description, length: {minimum: 5}
     validates :title, uniqueness: true 
-   
+    #validates :no_save_error
+
+    #custom_setter
     def categories=(value) # se utiliza para asignar los category_id que se reciben desdes el form
-        @categories = value
+        if value != nil
+            @categories = value
         #raise @categories.to_yaml
+        else
+            rais @value
+        end
     end
 
     private

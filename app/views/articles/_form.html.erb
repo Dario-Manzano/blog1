@@ -6,7 +6,7 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
         <div class="col-lg-6 offset-lg-3">
             <div class="container-md-12"> 
                 <h3><%= "#{titulo} articulo" %></h3>
-                <%= form_with(model: article, local: true) do |f|%>
+                <%= form_with(model: article, local: true) do |f|%> <%# article se pasa como variable desde form %>
                     <%= puts "Comprobacion de error #{article.errors.any?}" %>
                     <%# raise article.to_yaml %>
                     <% if article.errors.any? %>
@@ -24,7 +24,7 @@ Esa se inserta en otras paginas para evitar copiar y pegar codigo %>
                         <%= f.text_field :title, placeholder:"Título", class:"form-control" %>        
                     </div>
                     <div>
-                        <% Category.all.each do |category| %>
+                        <% categ.each do |category| %> <%# categories se para como variable por form %>
                             <%= check_box_tag "categories[]", category.id %><%= category.name %>
                             <%# [] son para seleccionar varios, la variable debe ser igual a la de controlador sencible a mayusculas%>
                             <%# raise @catego %>
