@@ -21,15 +21,15 @@ class Article < ApplicationRecord
     validates :title, length: {in: 5..25}
     validates :description, length: {minimum: 5}
     validates :title, uniqueness: true 
-    #validates :no_save_error
-
+    
+    #Necesito validar, mostrar error en la view
     #custom_setter
     def categories=(value) # se utiliza para asignar los category_id que se reciben desdes el form
         if value != nil
             @categories = value
         #raise @categories.to_yaml
         else
-            rais @value
+            raise @value.to_yaml
         end
     end
 
